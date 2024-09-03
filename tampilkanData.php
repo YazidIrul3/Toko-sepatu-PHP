@@ -4,6 +4,7 @@ include "koneksi.php";
 function tampilkan($query) {
     global $koneksi;
     $result = mysqli_query($koneksi,$query);
+    
     while($data = mysqli_fetch_assoc($result)) {
         $items[] = array(
             'id' =>$data["id"],
@@ -19,8 +20,9 @@ function tampilkan($query) {
             'status' => 'ok',
             'items' => $items,
         );
+ 
+    }        
+    return $response;
     }
-        
-        return $response;
-}
+
 ?>

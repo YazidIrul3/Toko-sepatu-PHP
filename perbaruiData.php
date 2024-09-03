@@ -17,15 +17,21 @@ function perbarui_sepatu($post, $id_sepatu) {
     $deskripsi = $post['deskripsi'];
     $stock = $post['stock'];
     $harga = $post['harga'];
-    $foto = $_FILES['foto']['name'];
     $jenis = $post['jenis'];
+    /*
+    $foto = $_FILES['foto']['name'];
     $file_tmp = $_FILES['foto']['tmp_name'];
-    move_uploaded_file($file_tmp, 'images/'.$foto);
+ move_uploaded_file($file_tmp, 'images/'.$foto);
+ */
     
-    $query = "update product set nama = '$nama', brand = '$brand' , deskripsi = '$deskripsi',stock = '$stock', harga = '$harga', foto = '$foto', jenis = '$jenis' where id=$id_sepatu";
-    mysqli_query($koneksi, $query);
     
-   return mysqli_affected_rows($koneksi);
+  $sql = mysqli_query($koneksi, "UPDATE product SET nama = '$nama', brand = '$brand' , deskripsi = '$deskripsi',stock = '$stock', harga = '$harga',  jenis = '$jenis' WHERE id='$id_sepatu'");
+    
+  if($sql > 0) {
+    return mysqli_affected_rows($koneksi);
+  } else {
+    return mysqli_error($koneksi);
+  }
 }
 
 
