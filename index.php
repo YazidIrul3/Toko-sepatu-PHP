@@ -5,13 +5,17 @@ session_start();
 $totalBarangKeranjang = 0;
 $sepatu_running = tampilkan("SELECT * FROM product WHERE jenis= 'Running'");
 $sepatu_sepakbola = tampilkan("SELECT * FROM product WHERE jenis= 'Sepak bola'");
-
+$sepatu_futsal = tampilkan("SELECT * FROM product WHERE jenis= 'Futsal'");
+$sepatu_sneakers = tampilkan("SELECT * FROM product WHERE jenis= 'Sneakers'");
+$id_user = $_SESSION['id_user'];
 
 if (isset($_SESSION['keranjang'])) {
    $totalBarangKeranjang =  count($_SESSION['keranjang']);
 } else {
     $totalBarangKeranjang = 0;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -56,15 +60,15 @@ if (isset($_SESSION['keranjang'])) {
     <div class="">
         <div class="flex flex-col ">
             <nav class="flex justify-between flex-row items-center bg-yellow-500 py-3 2xl:px-3 xl:px-3 lg:px-3 md:px-3 px-2">
-            <div class="text-xl font-bold">
+            <a href="index.php" class="text-xl font-bold">
                 <h1>Toko Sepatu</h1>
-            </div>
+            </a>
             
             <div class="2xl:flex xl:flex lg:flex md:flex hidden items-center gap-2 text-lg font-bold text-slate-50">
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sepakbola.php">Sepak bola</a>
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/futsal.php">Futsal</a>
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/running.php">Running</a>
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sneakers.php">Sneakers</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sepak bola">Sepak bola</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Futsal">Futsal</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Running">Running</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sneakers">Sneakers</a>
             </div>
             
             
@@ -81,8 +85,16 @@ if (isset($_SESSION['keranjang'])) {
 
                     <div id="userMenu" class="absolute top-14 right-0 font-bold flex flex-col w-32 justify-center  items-center">
                         <div id="login-div" class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
-                            <a href="login.php" class="py-2 text-lg  hover:text-slate-900">Login</a>
+                            <a id="login-btn" href="login.php" class="py-2 text-lg  hover:text-slate-900">Login</a>
                         </div>
+
+                        <?php
+                        if(isset($id_user)) {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'none';
+                            </script>";
+                        }
+                        ?>
                         
                         <div class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
                             
@@ -96,22 +108,14 @@ if (isset($_SESSION['keranjang'])) {
     </nav>
 
     
-    <div class="2xl:hidden xl:hidden lg:hidden md:hidden flex items-center gap-2 text-lg font-bold text-slate-900 px-4 py-2">
-        <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sepakbola.php">Sepak bola</a>
-        <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/futsal.php">Futsal</a>
-        <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/running.php">Running</a>
-         <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sneakers.php">Sneakers</a>
+    <div class="2xl:hidden xl:hidden lg:hidden md:hidden flex items-center gap-2 text-sm font-bold text-slate-900 px-4 py-2">
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sepak bola">Sepak bola</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Futsal">Futsal</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Running">Running</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sneakers">Sneakers</a>
     </div>
 
-    <nav class="bg-slate-50  text-slate-900 py-2 font-semibold text-lg flex flex-row gap-5 px-3">
-        <div class="flex gap-4">
-            <div class="hover:text-slate-900 ">Brand</div>
-            <button class="hover:text-slate-900 ">Jenis Sepatu</button>
-        </div>
-
-
-        
-    </nav>
+  
     </div>
 
     <header>
@@ -152,22 +156,16 @@ if (isset($_SESSION['keranjang'])) {
          </header>
 
         <div class="flex flex-row gap-4 justify-center min-w-full items-center ">
-            <a href="">
+            <a href="brand/?brand=Adidas">
                 <img src="https://topsystem.id/api/brand/thumbs/1656596624.jpg" alt="">
             </a>
-            <a href="">
+            <a href="brand/?brand=Specs">
                 <img src="https://topsystem.id/api/brand/thumbs/1656596550.jpg" alt="">
             </a>
-            <a href="">
-                <img src="https://topsystem.id/api/brand/thumbs/1650270376.png" alt="">
-            </a>
-            <a href="">
+            <a href="brand/?brand=Ortuseight">
                 <img src="https://topsystem.id/api/brand/thumbs/1650270344.png" alt="">
             </a>
-            <a href="">
-                <img src="https://topsystem.id/api/brand/thumbs/1650270132.png" alt="">
-            </a>
-            <a href="">
+            <a href="brand/?brand=Mills">
                 <img src="https://topsystem.id/api/brand/thumbs/1656596356.jpg" alt="">
             </a>
             <button id="lihatSemua-btn">Lihat semua</button>
@@ -180,41 +178,44 @@ if (isset($_SESSION['keranjang'])) {
 
             <div class="flex flex-row gap-4 justify-end hover:cursor-pointer" id="closeBrandMenu">X</div>
             <div class="grid 2xl:grid-cols-4 xl:grid-cold-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-3 gap-4 mx-auto container h-full">
-            <a href="brand/adidas.php">
+            <a href="brand/?brand=Adidas">
                 <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1656596624.jpg" alt="">
             </a>
-            <a href="brand/specs.php">
+            <a href="brand/?brand=Specs">
                 <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1656596550.jpg" alt="">
             </a>
-            <a href="brand/puma.php">
-                <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1650270376.png" alt="">
-            </a>
-            <a href="brand/ortuseight.php">
+            
+            <a href="brand/?brand=Ortuseight">
                 <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1650270344.png" alt="">
             </a>
-            <a href="brand/nike.php">
-                <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1650270132.png" alt="">
-            </a>
-            <a href="brand/mills.php">
+            <a href="brand/?brand=Mills">
                 <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1656596356.jpg" alt="">
+            </a>
+            <a href="brand/?brand=NIke">
+                <img class="max-w-24" src="https://topsystem.id/api/brand/thumbs/1650270132.png" alt="">
             </a>
         </div>
         </div>
         </div>
 
-        <div>
-            <h1 class="text-3xl font-bold">Sepatu Running</h1>
-            <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
+        <div class="flex flex-col mt-5 gap-3">
+
+            <div>
+                <h1 class="text-3xl font-bold">Sepatu Running</h1>
+                <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
                 <?php foreach($sepatu_running['items'] as $value) { ?>    
-                <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                    <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                        <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
+                            <h1><?php echo $value['jenis'] ?></h1>
+                        </div> -->
                     <img class="" src="./images/<?php echo $value['foto'] ?>" alt="">
-                    <h1 class="text-xl font-bold"><?php echo $value['nama'] ?></h1>
+                    <h1 class="text-xl truncate font-bold"><?php echo $value['nama'] ?></h1>
                     <p>Rp. <?php echo number_format($value['harga']) ?></p>
                 </a>
                 <?php } ?>              
             </div>
         </div>
-
+        
         <div>
             <h1 class="text-3xl font-bold">Sepatu Sepak bola</h1>
             <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
@@ -230,11 +231,44 @@ if (isset($_SESSION['keranjang'])) {
                 <?php } ?>              
             </div>
         </div>
-
+        
+        <div>
+            <h1 class="text-3xl font-bold">Sepatu Futsal</h1>
+            <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
+                <?php foreach($sepatu_futsal['items'] as $value) { ?>    
+                    <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                        <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
+                        <h1><?php echo $value['jenis'] ?></h1>
+                    </div> -->
+                    <img class="" src="./images/<?php echo $value['foto'] ?>" alt="">
+                    <h1 class="text-xl truncate font-bold"><?php echo $value['nama'] ?></h1>
+                    <p>Rp. <?php echo number_format($value['harga']) ?></p>
+                </a>
+                <?php } ?>              
+            </div>
         </div>
+        
+        <div>
+            <h1 class="text-3xl font-bold">Sepatu Sneakers</h1>
+            <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
+                <?php foreach($sepatu_sneakers['items'] as $value) { ?>    
+                    <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                        <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
+                            <h1><?php echo $value['jenis'] ?></h1>
+                    </div> -->
+                    <img class="" src="./images/<?php echo $value['foto'] ?>" alt="">
+                    <h1 class="text-xl truncate font-bold"><?php echo $value['nama'] ?></h1>
+                    <p>Rp. <?php echo number_format($value['harga']) ?></p>
+                </a>
+                <?php } ?>              
+            </div>
+        </div>
+    </div>
+        
+    </div>
         </section>
     </div>
-
+    
     <footer>
         <div class="text-center p-3 bg-slate-900 text-slate-50">
             © <?php echo date('Y'); ?> Copyright By

@@ -53,6 +53,8 @@ if(!isset($_SESSION['role']) == 'admin') {
         </nav>
 
         <section id="product" class="p-3 mt-3 w-full flex flex-col gap-5">
+            <h1 class="font-bold text-3xl p-2" >Produk</h1>
+
             <form enctype="multipart/form-data" action="../tambahProduk.php" method="POST" class="bg-slate-50 shadow-slate-900 2xl:w-3/6 xl:w-3/6 lg:w-3/6 w-full shadow-sm p-2 flex flex-col gap-3" >
                 <div class="flex flex-col justify-center gap-2 w-full">
                     <label class="font-bold">Nama</label>
@@ -69,10 +71,8 @@ if(!isset($_SESSION['role']) == 'admin') {
                     <select name="brand" id="">
                         <option>Adidas</option>
                         <option>Nike</option>
-                        <option>Puma</option>
                         <option>Specs</option>
                         <option>Ortuseight</option>
-                        <option>Ardiles</option>
                         <option>Mills</option>
                     </select>
                 </div>
@@ -115,7 +115,7 @@ if(!isset($_SESSION['role']) == 'admin') {
                 </button>
             </form>
 
-            <table class="p-3 mt-3 w-full flex flex-col gap-5 overflow-y-scroll">
+            <table class="p-3 mt-3 w-full flex flex-col gap-5 2xl:overflow-hidden xl:overflow-hidden lg:overflow-hidden overflow-y-scroll">
                 <tr class="bg-slate-900 text-slate-50">
                     <th class="border border-slate-900 px-2">No</th>
                     <th class="border border-slate-900 px-2 w-44">Nama</th>

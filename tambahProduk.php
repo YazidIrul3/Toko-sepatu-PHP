@@ -13,17 +13,17 @@ include 'koneksi.php';
         move_uploaded_file($file_tmp, 'images/'.$foto);
 
             
-        $sql = mysqli_query($koneksi, "INSERT INTO product(nama,brand,jenis, deskripsi,foto, harga, stock) VALUE ('$nama', '$brand','$jenis','$deskripsi','$foto', '$harga', '$stock')");
+        $sql = mysqli_query($koneksi, "INSERT INTO product(nama,brand,jenis, deskripsi,foto, harga, stock) VALUES ('$nama', '$brand','$jenis','$deskripsi','$foto', '$harga', '$stock')");
 
         if ($sql > 0) {
             echo "<script>
-            alert('Data created success')
-            document.location.href = 'product.php'
+            alert('Data created success');
+            document.location.href = 'dashboard/produk.php'
             </script>";
         } else {
             echo "<script>
             alert('Data created failed')
-            document.location.href = 'product.php'
+            document.location.href = 'dashboard/produk.php'
             </script>";    
         }  
 }

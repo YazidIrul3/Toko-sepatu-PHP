@@ -39,7 +39,7 @@ $data2 = tampilkanNamaProduk("SELECT p.nama FROM transaksi t INNER JOIN detail d
 <body class="">
     <div class=" container mx-auto flex justify-center items-center flex-col">
         <h1 class=" text-center text-yellow-500 font-extrabold text-4xl mb-5">INVOICE</h1>
-        <div>
+        <div class="max-w-full 2zl:overflow-hidden xl:overflow-hidden lg:overflow-hidden md:overflow-hidden sm:overflow-hidden overflow-x-scroll p-2">
 
             <table>
                 <thead class=" bg-slate-900 text-slate-50">

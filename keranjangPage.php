@@ -40,7 +40,7 @@ $total = 0;
                     <div class="flex flex-col gap-1">
                         <h1 class="font-bold text-xl"><?php echo $value['nama'] ?></h1>
                         <p>jumlah beli : <span> <?php echo $value['jumlah'] ?> </span></p>
-                        <p class="text-lg font-bold text-yellow-500"><?php echo number_format( $value['harga'] * $value['jumlah']) ?></p>
+                        <p class="text-lg font-bold text-yellow-500">Rp. <?php echo number_format( $value['harga'] * $value['jumlah']) ?></p>
                     </div>
                 </div>
                 <a name="hapus" href=" keranjang.php?aksi=hapus&id=<?= $value['id'] ?>" class="text-slate-900 font-bold text-lg hover:bg-red-500 hover:text-slate-50 px-3 py-2 rounded-xl">Hapus</a>

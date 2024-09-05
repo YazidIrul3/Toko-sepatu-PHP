@@ -39,10 +39,24 @@ $data = tampilkan("SELECT t.id_transaksi,u.nama,t.tanggal,t.total_harga FROM tra
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaksi Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+            .hidden-scrollbar {
+            overflow: auto; /* Untuk memungkinkan scroll */
+        }
+
+        .hidden-scrollbar::-webkit-scrollbar {
+        display: none; /* Menyembunyikan scrollbar di Chrome, Safari, dan Edge */
+        }
+
+        .hidden-scrollbar {
+            -ms-overflow-style: none; /* Menyembunyikan scrollbar di Internet Explorer dan Edge */
+            scrollbar-width: none; /* Menyembunyikan scrollbar di Firefox */
+        }
+    </style>
 </head>
 <body>
 <div class="flex 2xl:flex-row xl:flex-row lg:flex-row flex-col h-screen relative ">
-<nav class="sidebar 2xl:flex xl:flex lg:flex md:flex flex-col items-centerx bg-yellow-500 2xl:w-2/6 xl:w-2/6 lg:w-2/6 w-screen">
+    <nav class="sidebar 2xl:flex xl:flex lg:flex md:flex flex-col items-centerx bg-yellow-500 2xl:w-2/6 xl:w-2/6 lg:w-2/6 w-full">
         <div class="flex justify-end">
             <a href="../logout.php" class=" text-slate-50 font-bold text-lg p-2 mt-3 mr-7">
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAalJREFUSEvtlr9KA0EQxmcuR2BvNyCChfoCFiqCjZ36CBaWaqVoJ8TCzj+PoIIgdlpaSGxs1PgG2lhYKPoEQna2zGdWDBwa9DboBTEL19x+3G/2m9m5YerQ4g5x6e+AAbCIjADozepWHMePSqmntD7oxM65QQDnRDScFdrUMfORUmqBmeHfBYFF5ICIFkOhKf2M1vo0GOycuwQwTUS39Xp9NWsAURRdvWs3tNbbwWBrbZWZJxvwa2PMVFawiLzZ23B4S2u92QV/cq5Wq/UVCoVykiTrfjMXq0VknIjOANw382mtHQPQw8wvxpibH8+xtXaOmQ+JqBhaSK2C+ba4AMTOuR0iWkl9IOjqlEql6kf4l2CfzyiKKkQ0kdXCVjqt9aem9CVYRPp9ThuPz23bKxjsSQCKzrm9D23xd61OH1FElohoN7fiSsOdcxMAKgDucrtOzQB83gGsGWPKuTWQVtWVS+fqgr0DHRsERGSfiJbb7S7MPJskyUnwINCYuQaY+QLAUCicmY+VUvNtDXvv3S0SkVH/e8wKj+P4QSn1nNYHTZlZQVl0/w/8CohhOi4J2iyXAAAAAElFTkSuQmCC"/>
@@ -60,7 +74,8 @@ $data = tampilkan("SELECT t.id_transaksi,u.nama,t.tanggal,t.total_harga FROM tra
                 <a href="" class="text-slate-50 font-bold text-lg p-2 w-full bg-yellow-600">Transaksi</a>
             </div>
         </nav>
-        <section id="product" class="p-3 mt-3 w-full flex flex-col gap-5 max-h-screen overflow-y-scroll">
+        <section id="product" class="hidden-scrollbar p-3 mt-3 w-full flex flex-col gap-5 max-h-screen overflow-y-scroll">
+            <h1 class="font-bold text-3xl p-2" >Riwayat Transaksi</h1>
             <table class="border border-slate-900">
                 <tr class="bg-slate-900 text-slate-50">
                     <th class="border border-slate-900 px-2">No Transaksi</th>

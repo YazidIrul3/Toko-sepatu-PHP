@@ -8,6 +8,8 @@ if(!isset($_SESSION['role']) == 'pelanggan' ) {
     </script>";
 }
 
+$id_user = $_SESSION['id_user'];
+
 function tampilkan($query){
     global $koneksi;
     $result = mysqli_query($koneksi,$query);
@@ -130,23 +132,25 @@ if (isset($_SESSION['keranjang'])) {
     </style>
 </head>
     <body>
-    <nav class="flex justify-between flex-row items-center bg-yellow-500 py-3 2xl:px-3 xl:px-3 lg:px-3 md:px-3 px-2">
+    <div class="flex flex-col ">
+            <nav class="flex justify-between flex-row items-center bg-yellow-500 py-3 2xl:px-3 xl:px-3 lg:px-3 md:px-3 px-2">
             <a href="index.php" class="text-xl font-bold">
                 <h1>Toko Sepatu</h1>
             </a>
             
-            <div class="flex items-center gap-4 relative w-3/6 bg-slate-50 p-2 rounded-lg">
-                <input type="text" value="" name="search" class="border-2 w-full h-full  focus:outline-none focus:border-none" placeholder="Cari Sepatu">
-                <div class="box-icon text-slate-900 absolute right-1 rounded-lg top-1/2 -translate-y-1/2  bg-yellow-500 py-1 px-2">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAotJREFUSEvllkuojVEYhp8j15QYUMdlJPeQg+QeEykDI7coIU5kgIGYGaEwMCARQ7klBgwkJXIXEkXuuU9IIUm+N99/Wv69//N/HXt3BtZk7/b+3vdda32XdzXQTquhnXSJCHcEJgJDgV7AI+A68OZfNt2acD9gM7AY6FFF5CqwEzjelg0UCS8CDgDdAqRngfnAl0BsS0g14eUuqqBfwGHgNHAHeGffm4DJwCpggDPdBKYB36LieeHRwG2gA/ABmAPcKCDrChwEFvr/ew2zuq3CZ4DZDp4KXCohUuEpZgLw025nCPA0Ip6euA/w3kH7rWpXRgiAMX5LClcxbo3gUuEFnk/hJgFXIgQecx8YAVwAZkZwqfB6bw/hugNfIwQeow5QUb4F+kZwqfBGYJuDuti1/YgQeIxwwn8GekZwqfBS4JCDBgOPIwQecwSY5+lRmkpXKjwKuOuINcCeUvSfgE5elBqn+6zXmyO4fB+/suHR3/KlT536e4BkA7DD48JFmRdeC+x2El37shLhscBlayHVxDG/7sBeqXCnzj4Qxjv6lBXMOuBZjk1CK2yWb/cO0PAYBDwPqVIpLFxv4DwwMiFRn97zXI4DtDGNTC3NZ+X5hPFtMcN4GBEvcie50i4/lcZi0dKGlpgzKc+yTy2ZyibgRWsbKHsIyH1EOMuLTb6sh8A54Chwy8mHWX4fJEJ6JMitnhSJlwlHbi2LOWnWOTcBaIPT3UoreGoprPaTU6lGsqW2nGLd8TKvXEthcSs1MoqBiZCue4bPhpafay2ciV+zKdaYiL92+/yY/VYPYXGrpzVYsmuXR8ur63rijHy4efNFfxjoNfrXqteJMxFZ5KdqrVFv4cJ2/P+EfwPso2Yfp6I9kgAAAABJRU5ErkJggg=="/>           
-                </div>
+            <div class="2xl:flex xl:flex lg:flex md:flex hidden items-center gap-2 text-lg font-bold text-slate-50">
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sepak bola">Sepak bola</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Futsal">Futsal</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Running">Running</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sneakers">Sneakers</a>
             </div>
+            
             
             <div class="flex items-center gap-2">
                 <div class="relative">
-                    <div class="box-icon text-slate-900 ">
+                    <a href="keranjangPage.php" class="box-icon text-slate-900 ">
                         <img class="w-10 h-10" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAgdJREFUSEvN1kuoTXEUx/HPlYFHpEQyIhnIxEQiEwYykMHFhJnyLAMDxUCkPAYG0i2RMnJH9w6NhIEoxUAJA4/yiGIgMvAIZ93+u3bbuef893k4Vp3B2Wf91/e/fuuxz5AB2dCAuP4L8CLEJ+wLHvRTjXLGx3GsBHuGjXjejwu0AgfvIVb0G1yWehgHEnAt7vQaPllzzcV7TMUodvwrcHCuYju+YzO+dQl/hRdFjFbjFBLf7hJWPb4V4/Gw3Rw/wvIewnfiSg54Ny4m8Clc7+ASJ7EGPzEPn3LAM/AOsxN0Q03wTHzENIxhW06NC5/zabR+Nxpuac2FUlZsE67VAS9BbLGwczhYI+u7WI0PWIBfdcDhewPr8RnzM0drcWl8zuJQ+cLturrw3ZJqFN934XJG1tGMR5LfMjztBDylAXyb5HqcMWKR0BssxP1GbVdWL5qbcZw7ihMpQMzjyxZZx+yPpN/340I34GiO12l/Zyg94fIj9cTE7HYidXHmUqpxLjiWz95mznWkjvNR66jX9Azy11TfmP+/rC44AsRSmJPqFn+RqjYL+9JqDIWaWl3waRxOkW6l2a4Gvol16eGZ0kh1VeNy0JAwpK9abKciocku1/a1WA1a3r0h454m4Gio8AuL35vKXVfqCBZbKN5W91o02Kq0Xp/0qsYZzZzn0knGeZHbeA0M/AffmVMfIK6tVQAAAABJRU5ErkJggg=="/>
-                    </div>
+                    </a>
                     <p class="text-xl font-bold absolute bg-slate-50  rounded-full top-0 right-0 w-5 h-5 flex justify-center items-center"><?php echo $totalBarangKeranjang ?></p>
                 </div>
                 
@@ -155,8 +159,16 @@ if (isset($_SESSION['keranjang'])) {
 
                     <div id="userMenu" class="absolute top-14 right-0 font-bold flex flex-col w-32 justify-center  items-center">
                         <div id="login-div" class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
-                            <a href="login.php" class="py-2 text-lg  hover:text-slate-900">Login</a>
+                            <a href="login.php" id="login-btn" class="py-2 text-lg  hover:text-slate-900">Login</a>
                         </div>
+
+                        <?php
+                        if(isset($id_user)) {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'none';
+                            </script>";
+                        }
+                        ?>
                         
                         <div class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
                             
@@ -168,6 +180,18 @@ if (isset($_SESSION['keranjang'])) {
             </div>
         </div>
     </nav>
+
+    
+    <div class="2xl:hidden xl:hidden lg:hidden md:hidden flex items-center gap-2 text-sm font-bold text-slate-900 px-4 py-2">
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sepak bola">Sepak bola</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Futsal">Futsal</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Running">Running</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sneakers">Sneakers</a>
+    </div>
+
+  
+    </div>
+
     <div class=" mx-auto h-screen bg-slate-100">
         
             <section class="bg-slate-50 shadow shadow-inner grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 h-full p-7">

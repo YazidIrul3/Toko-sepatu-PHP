@@ -4,9 +4,8 @@ session_start();
 $id_user = $_SESSION['id_user'];
 
 
-
+if(isset($id_user)) {
 if(isset($_POST['add'])) {
-    if(isset($id_user)) {
 
         if(isset($_SESSION['keranjang'])) {
             
@@ -47,7 +46,6 @@ if(isset($_POST['add'])) {
     </script>";
 }
 }
-}
 
 if(isset($_GET['aksi'])) {
     if($_GET['aksi'] == 'hapus') {
@@ -58,19 +56,19 @@ if(isset($_GET['aksi'])) {
                 alert('Produk di hapus dari keranjang');
                 document.location.href = 'keranjangPage.php'
                 </script>";
+            }
         }
-    }
     } else if($_GET['aksi'] == 'beli') {
         $totalHarga = $_GET['total'];
         $query = mysqli_query($koneksi, "INSERT INTO transaksi (tanggal,id_pelanggan,total_harga) VALUES ('".date("Y-m-d")."','$id_user','$totalHarga')");
         $id_transaksi = mysqli_insert_id($koneksi);
-
+        
         foreach($_SESSION['keranjang'] as $key => $value) {
             $id_produk = $value['id'];
             $jumlah = $value['jumlah'];
             $sql = "INSERT INTO detail (id_transaksi, id_produk, jumlah) VALUES ($id_transaksi, $id_produk, $jumlah)";
             $res = mysqli_query($koneksi,$sql);
-
+            
             if($res > 0) {
                 unset($_SESSION['keranjang']);
                 echo "<script>
@@ -81,9 +79,10 @@ if(isset($_GET['aksi'])) {
                 </script>";
             }
         }
-
-       
+        
+        
     }
+}
 } else {
     echo "<script>
     alert('Login dulu');
@@ -91,4 +90,4 @@ if(isset($_GET['aksi'])) {
     </script>";
 }
 
-    ?>
+?>

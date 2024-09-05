@@ -3,6 +3,7 @@ include 'tampilkanData.php';
 
 session_start();
 $id = (int)$_GET['id'];
+$id_user = $_SESSION['id_user'];
 $sepatu = tampilkan("SELECT * FROM product WHERE id = '$id'");
 
 if (isset($_SESSION['keranjang'])) {
@@ -49,16 +50,17 @@ if (isset($_SESSION['keranjang'])) {
 </head>
 
 <body>
-<nav class="flex justify-between flex-row items-center bg-yellow-500 py-3 2xl:px-3 xl:px-3 lg:px-3 md:px-3 px-2">
-            <div class="text-xl font-bold">
+<div class="flex flex-col ">
+            <nav class="flex justify-between flex-row items-center bg-yellow-500 py-3 2xl:px-3 xl:px-3 lg:px-3 md:px-3 px-2">
+            <a href="index.php" class="text-xl font-bold">
                 <h1>Toko Sepatu</h1>
-            </div>
+            </a>
             
             <div class="2xl:flex xl:flex lg:flex md:flex hidden items-center gap-2 text-lg font-bold text-slate-50">
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sepakbola.php">Sepak bola</a>
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/futsal.php">Futsal</a>
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/running.php">Running</a>
-                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sneakers.php">Sneakers</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sepak bola">Sepak bola</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Futsal">Futsal</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Running">Running</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sneakers">Sneakers</a>
             </div>
             
             
@@ -74,9 +76,17 @@ if (isset($_SESSION['keranjang'])) {
                     <img class="w-10 h-10 " src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAA7xJREFUSEvFl3fIj2sYxz/IHp2yZcXhhMimKBIiK1mHhMg4ji0kOyMroyQzf8geGQkndLJHiMieiZAie7u/uh7dv9vveZ+fv1z1ej33te5rfa/7zcZvomy/yS+/6jg7UB+oAJSySz8EbgGnga+ZBpKp47+A4UBnoGiM8afAZmARcDPpAkmOCwPLgU5Jhjy+ot4CDAaexell5bgccAD405RlcDdw1vsRq4791APawI/yXQVaAA/SOY9zrHSeA0qb0n3gb+BEQuSNgPVAWU9PF3oS6qVznBM4ak0k+TXAMOCVKecDWlmDSf86sA94b/wCwBKgt32fdJlrDHz2nadzPBsYZ0Jy2tdTUPr3uBpWCyK4AHQA7nnn0u1j3zOBiVk5VorUkYpa6a0KvDaFXMA1oHxMum+bfBR5IeCKjd1HoJJ/sTDihcAIM6x6HfecTAMmu5t/AoYAG42nqKQnW5OAGZ5OM+CgfS8ARkc837H+/wgo7rrzjFfjSPYiUN3dfJ3LSs8g6k1AV+v2ugHvPFDTMqhSfSffsRrgiJ0LBEYGBt4BuYFZwISAp7PxLqKXgFLskxrtXztoYAiX4lidu9gEugBbAwOXrYZrgV4BT1no4ZDtkmXFZ3e3EdPZP8CyMGJ13XTTKJIGdYRgA2ys1On/maxGSx2cF1jqRRc5V8NG3a5pmRs6VmrVACItANXbp4KAoi4TnEefd4Ealm5fpKS7sBaJaJQ1YkqqlV6BvKitzWvoQ0ZWGjT6vG0uQ0PTXDayJagVaclINsVxQw8SNTZR2tMFWNmhW3Nj7HUodScmCzqe4v6ZanytVE1MiuM8rviPrSt3AB0DY9rFaiDNt0BENRW9dQilNB8GNFZfAr1dbszaOXx4bqP6IXSs79UGkRodgbu6VCTUUWQVs4hMrBtAa3sY6Fvze8qNoFBvhSvFwEg/RK4mwP/G1FqrDWgnaxUWs3PdWGASQWl+ayoZF2kT1XI48MLht8BDlxYJJ47FOdb5TrcS25uAbqmGUqpEgjyNjDLik8okHJhjh2oglSBCuO3hYyLddvrDIgrHRnM8KCHVq4B+gYxmWFArVPtBcQ+BKsAhhzIlPFl1cQT4cf5bAvs9prBA5VPtUyirp48aSfWOXiFa5CqDUEqG9KTJYWAj2f5WEnW/SJE2tY7/6aJJjz29NgRzY7zxScj299rOs3q/iRNOchzpKer5brF3S/C6ARgb98DLpMZx9oXXesxrr+q3SC8PAYh+R++ypKz88l8SiQYzFcg01Znay1juGzC8sh8i2SWvAAAAAElFTkSuQmCC"/>
 
                     <div id="userMenu" class="absolute top-14 right-0 font-bold flex flex-col w-32 justify-center  items-center">
-                        <div id="login-div" class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
+                        <div id="login-btn" class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
                             <a href="login.php" class="py-2 text-lg  hover:text-slate-900">Login</a>
                         </div>
+
+                        <?php
+                        if(isset($id_user)) {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'none';
+                            </script>";
+                        }
+                        ?>
                         
                         <div class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
                             
@@ -90,14 +100,15 @@ if (isset($_SESSION['keranjang'])) {
     </nav>
 
     
-    <div class="2xl:hidden xl:hidden lg:hidden md:hidden flex items-center gap-2 text-lg font-bold text-slate-900 px-4 py-2">
-        <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sepakbola.php">Sepak bola</a>
-        <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/futsal.php">Futsal</a>
-        <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/running.php">Running</a>
-         <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/sneakers.php">Sneakers</a>
+    <div class="2xl:hidden xl:hidden lg:hidden md:hidden flex items-center gap-2 text-sm font-bold text-slate-900 px-4 py-2">
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sepak bola">Sepak bola</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Futsal">Futsal</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Running">Running</a>
+                <a class="hover:bg-slate-900 hover:text-slate-50 px-3 py-2 rounded-xl" href="category/?category=Sneakers">Sneakers</a>
     </div>
+</div>
 
-    <div class="grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 place-content-center h-screen container mx-auto px-3">
+    <div class="grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 mb-4 place-content-center p-5 2xl:h-screen xl:h-screen lg:h-screen h-full container mx-auto px-3">
         <div class="w-full h-full">
             <img class="w-full h-[400px] object-contain" src="./images/<?php foreach($sepatu['items'] as $sepatu) echo $sepatu['foto'] ?>" alt="">
         </div>
@@ -105,8 +116,9 @@ if (isset($_SESSION['keranjang'])) {
         <div class=" border border-slate-900 shadow-slate-900 rounded-xl shadow-sm p-7 h-full flex flex-col justify-center gap-5">
             <div class="flex items-center gap-2">
                 <a href="index.php" class="text-slate-900 font-bold text-lg">Home /</a>
-                <a href="index.php" class="text-slate-900 font-bold text-lg"><?php echo $sepatu['jenis'] ?></a>
+                <a href="category/?category=<?php echo $sepatu['jenis'] ?>" class="text-slate-900 font-bold text-lg"><?php echo $sepatu['jenis'] ?></a>
             </div>
+
             <div class="flex flex-col gap-2 mt-4">
                 <h1 class="font-normal text-3xl"><?php echo $sepatu['nama'] ?></h1>
                 <h1 class="font-extrabold text-4xl">Rp. <?php echo number_format($sepatu['harga']) ?></h1>
@@ -123,19 +135,22 @@ if (isset($_SESSION['keranjang'])) {
                     </div>
 
                     <div class="flex gap-4">
-                        <input type="submit" class="border border-slate-900 w-60 py-3 rounded-full text-slate-900 font-bold text-xl hover:bg-slate-900 hover:text-slate-50" name="add" value="Tambah ke keranjang" />
+                        <input type="submit" class="border border-slate-900 w-60 py-3 rounded-full text-slate-900 font-bold text-xl hover:bg-yellow-800 hover:text-slate-50" name="add" value="Tambah ke keranjang" />
                     </div>
                 </form>
             </div>
         </div>
     </div> 
 
+    
+
     <footer>
-        <div class="text-center p-3 bg-slate-900 text-slate-50">
+        <div class="text-center py-3 bg-slate-900 text-slate-50">
             © <?php echo date('Y'); ?> Copyright By
             <a class="text-slate-50" href="">Yazid Khairul</a>
         </div>
     </footer>
+
 
     <script>
         const userLogo = document.querySelector('#userLogo');
