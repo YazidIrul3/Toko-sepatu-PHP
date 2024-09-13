@@ -5,8 +5,28 @@ include "../koneksi.php";
 session_start();
 if(!isset($_SESSION['role']) == 'admin') {
     echo "<script>
-    document.location.href = '../login.php'
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
     </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
+}
+
+if($_SESSION['role'] != 'admin') {
+    echo "<script>
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
+    </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
 }
 
 function tampilkan($query){

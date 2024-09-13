@@ -9,9 +9,30 @@ $data_sepatu = tampilkan("SELECT * FROM product WHERE id=$id_sepatu");
 session_start();
 if(!isset($_SESSION['role']) == 'admin') {
     echo "<script>
-    document.location.href = '../login.php'
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
     </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
 }
+
+if($_SESSION['role'] != 'admin') {
+    echo "<script>
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
+    </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
+}
+
 if(isset($_POST['perbarui'])) { 
     if(perbarui_sepatu($_POST, $id_sepatu) > 0 ) {
         echo "<script>

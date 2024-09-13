@@ -5,11 +5,32 @@ include '../perbaruiData.php';
 session_start();
 $data_sepatu = tampilkan("SELECT * FROM product");
 
-if(!isset($_SESSION['role']) == 'admin') {
+if(!isset($_SESSION['role']) == 'pelanggan') {
     echo "<script>
-    document.location.href = '../login.php'
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
     </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
 }
+
+if($_SESSION['role'] != 'admin') {
+    echo "<script>
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
+    </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
+}
+
 
 ?>
 
@@ -142,11 +163,11 @@ if(!isset($_SESSION['role']) == 'admin') {
                     <td class="border border-slate-900 px-2"><?php echo $sepatu['stock'] ?></td>
                     <td class=" px-4 ">
                         <div class="flex gap-4">
-                            <a href="../dashboard/perbaruiProduk.php?id_sepatu=<?php echo $sepatu['id'] ?>" id="edit-button" class="bg-yellow-500 p-2 hover:cursor-pointer">
+                            <a href="../dashboard/perbaruiProduk.php?id_sepatu=<?php echo $sepatu['id'] ?>" id="edit-button" class=" w-8 h-8 bg-yellow-500 p-2 hover:cursor-pointer">
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAdxJREFUSEvllk9LFlEUxn8HXEYihH8gQQ1JaONONFJ34a6v4Cdw00ZpF7rxS/gN3Nku/+LWUJCIoLSCVFDcGQVPnrjGvPPe0Zl3rrjwwmzmMvd3njPnPucYd7TsjrjcClhSG/AM2Dez3zFxycGS+oF3wFPgI/DSzA7z8KRgSX3AJvA4A/oOvDCzr1l4MrCkdmAP6I2k9hswamY/rvaSgf1ASa+BxYKCXTKz6WRgSU+Aiys1kuaA+Qj8F/DAzP74Xi3FkgaADcAPe56Bx5SnUSxpEFgHeoK6L6GI/v1HSbPAQtjzdyO1/3FQug105VJ6EFE+k6SqJQ0Bq0B3QRHllbeb2XmteyzJTWELeHSD1TYor+VcFaDOiZpGZQOR5L67VkJpKWip6xSgboMdJTrZz+BQDfZYOdUtQN2TP5cIsNhAJA0D7ysoLQ0tTHWAujk8LBH9CTBWVum1Xi3J+2esy+TjOL680xNm5n230mryakkObGrckVNd6Xgr0GiqJb0Clm8I/zRYY2WlhamW9Pay27y5BuzQSTPzpt/yiqV6BZgqODEJtCjVR0BnBHwWlO62LDPzYYNiST6k+XzkhbOTeT4An8xMKaBNisPA5uPJ/6EsFSh/Tq3Rp05Q9w/8F5vDrx8WvK3tAAAAAElFTkSuQmCC"/>                        
                             </a>
                             
-                            <a href="../hapusSepatu.php?id_sepatu=<?php echo $sepatu['id']?>" class="bg-red-500 p-2">
+                            <a href="../hapusSepatu.php?id_sepatu=<?php echo $sepatu['id']?>" class=" w-8 h-8 bg-red-500 p-2">
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATZJREFUSEvtlrFNBDEQRd8XERGUQAknGoCrAQICTtABEiKHiwmghENcggQ1wDWAKIESICJjWKPdkzl25bWNtAR2spLHf77nz3hnxEBLA/HSm9jM1oAzYL3jsh/ApaTPPsHEEF8DJwGnV5JO/4zYzI6AWR+HwIGku9DZHxGb2S7wGAIl2seSnhrsvyHeAo4TIwrBZpJeWyP2kWY2AjZD3gL2N0kvbWc6q7rKt8vHTibxosqrq5tfqxAvJWmRelobnXSrKVgAzVM593TNl1rSd1rM7KL6+M7d9rQyu31nt0KcVdVF6hX5SnE1gpR3vCyNmCYxrlGuX7tRyF833mjkTzD5Uie2xyTie2AvkbCBPUjaj/1zHQK3mcQTSfMo4rrTbNctcCPyAu+Ak/m5C9d7oI8kDh4fjPgL4OzkH4Sm50YAAAAASUVORK5CYII="/>                        
                             </a>
                             

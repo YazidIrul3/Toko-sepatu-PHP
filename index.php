@@ -7,7 +7,6 @@ $sepatu_running = tampilkan("SELECT * FROM product WHERE jenis= 'Running'");
 $sepatu_sepakbola = tampilkan("SELECT * FROM product WHERE jenis= 'Sepak bola'");
 $sepatu_futsal = tampilkan("SELECT * FROM product WHERE jenis= 'Futsal'");
 $sepatu_sneakers = tampilkan("SELECT * FROM product WHERE jenis= 'Sneakers'");
-$id_user = $_SESSION['id_user'];
 
 if (isset($_SESSION['keranjang'])) {
    $totalBarangKeranjang =  count($_SESSION['keranjang']);
@@ -28,6 +27,8 @@ if (isset($_SESSION['keranjang'])) {
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+     
     <style>
         .show {
             display: flex;
@@ -88,18 +89,29 @@ if (isset($_SESSION['keranjang'])) {
                             <a id="login-btn" href="login.php" class="py-2 text-lg  hover:text-slate-900">Login</a>
                         </div>
 
-                        <?php
-                        if(isset($id_user)) {
-                            echo "<script>
-                            document.getElementById('login-btn').style.display = 'none';
-                            </script>";
-                        }
-                        ?>
                         
                         <div class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
                             
-                            <a href="profile.php" class="py-2 text-lg  hover:text-slate-900">Profile</a>
+                            <a id="profile-btn" href="profile.php" class="py-2 text-lg  hover:text-slate-900">Profile</a>
                         </div>
+                        <?php
+
+                        if(isset($_SESSION['id_user'])) {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'none';
+                            </script>";
+                            echo "<script>
+                            document.getElementById('profile-btn').style.display = 'flex';
+                            </script>";
+                        } else {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'flex';
+                            </script>";
+                            echo "<script>
+                            document.getElementById('profile-btn').style.display = 'none';
+                            </script>";
+                        }
+                        ?>
                     </div>
                 </div>
                 
@@ -155,7 +167,7 @@ if (isset($_SESSION['keranjang'])) {
             </div>
          </header>
 
-        <div class="flex flex-row gap-4 justify-center min-w-full items-center ">
+        <div class="flex flex-row gap-4 justify-center min-w-full items-center" data-aos="fade-right">
             <a href="brand/?brand=Adidas">
                 <img src="https://topsystem.id/api/brand/thumbs/1656596624.jpg" alt="">
             </a>
@@ -204,7 +216,7 @@ if (isset($_SESSION['keranjang'])) {
                 <h1 class="text-3xl font-bold">Sepatu Running</h1>
                 <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
                 <?php foreach($sepatu_running['items'] as $value) { ?>    
-                    <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                    <a data-aos="fade-up" href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
                         <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
                             <h1><?php echo $value['jenis'] ?></h1>
                         </div> -->
@@ -220,7 +232,7 @@ if (isset($_SESSION['keranjang'])) {
             <h1 class="text-3xl font-bold">Sepatu Sepak bola</h1>
             <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
                 <?php foreach($sepatu_sepakbola['items'] as $value) { ?>    
-                <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                <a data-aos="fade-up" href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
                     <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
                         <h1><?php echo $value['jenis'] ?></h1>
                     </div> -->
@@ -236,7 +248,7 @@ if (isset($_SESSION['keranjang'])) {
             <h1 class="text-3xl font-bold">Sepatu Futsal</h1>
             <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
                 <?php foreach($sepatu_futsal['items'] as $value) { ?>    
-                    <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                    <a data-aos="fade-up" href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
                         <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
                         <h1><?php echo $value['jenis'] ?></h1>
                     </div> -->
@@ -252,7 +264,7 @@ if (isset($_SESSION['keranjang'])) {
             <h1 class="text-3xl font-bold">Sepatu Sneakers</h1>
             <div class="flex flex-row gap-2 2xl:overflow-hidden xl:overflow-hidden overflow-x-scroll min-w-full scroll-smooth">                
                 <?php foreach($sepatu_sneakers['items'] as $value) { ?>    
-                    <a href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
+                    <a data-aos="fade-up" href="detail.php?id=<?php echo $value['id'] ?>" class="bg-slate-50 p-2 rounded-lg max-w-52 min-h-full hover:text-slate-900">
                         <!-- <div class="flex justify-end p-2 text-yellow-500 font-extrabold">
                             <h1><?php echo $value['jenis'] ?></h1>
                     </div> -->
@@ -306,6 +318,11 @@ if (isset($_SESSION['keranjang'])) {
         // Format jumlah dengan formatter
         return formatter.format(amount);
 }
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
     </script>
 </body>
 </html>

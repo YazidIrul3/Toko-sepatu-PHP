@@ -9,7 +9,7 @@ function tampilkan($query) {
         $items[] = array(
             'id_transaksi' =>$data["id_transaksi"],
             'tanggal' => $data["tanggal"],
-            'pelanggan' => $data['nama'],
+            'produk' => $data['nama'],
             'jumlah' => $data["jumlah"],
             'harga' => $data["harga"],
         );

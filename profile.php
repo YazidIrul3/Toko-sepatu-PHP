@@ -159,21 +159,32 @@ if (isset($_SESSION['keranjang'])) {
 
                     <div id="userMenu" class="absolute top-14 right-0 font-bold flex flex-col w-32 justify-center  items-center">
                         <div id="login-div" class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
-                            <a href="login.php" id="login-btn" class="py-2 text-lg  hover:text-slate-900">Login</a>
+                            <a id="login-btn" href="login.php" class="py-2 text-lg  hover:text-slate-900">Login</a>
                         </div>
 
-                        <?php
-                        if(isset($id_user)) {
-                            echo "<script>
-                            document.getElementById('login-btn').style.display = 'none';
-                            </script>";
-                        }
-                        ?>
                         
                         <div class="w-full flex justify-center border border-slate-900 hover:bg-slate-200 bg-slate-50">
                             
-                            <a href="profile.php" class="py-2 text-lg  hover:text-slate-900">Profile</a>
+                            <a id="profile-btn" href="profile.php" class="py-2 text-lg  hover:text-slate-900">Profile</a>
                         </div>
+                        <?php
+
+                        if(isset($_SESSION['id_user'])) {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'none';
+                            </script>";
+                            echo "<script>
+                            document.getElementById('profile-btn').style.display = 'flex';
+                            </script>";
+                        } else {
+                            echo "<script>
+                            document.getElementById('login-btn').style.display = 'flex';
+                            </script>";
+                            echo "<script>
+                            document.getElementById('profile-btn').style.display = 'none';
+                            </script>";
+                        }
+                        ?>
                     </div>
                 </div>
                 

@@ -10,7 +10,7 @@ function tampilkanNamaProduk($query) {
     
     while($data = mysqli_fetch_assoc($result)) {
         $items[] = array(
-            'nama_produk' => $data['nama'],
+            'nama_pelanggan' => $data['nama'],
         );
         $response = array(
             'status' => 'ok',
@@ -21,9 +21,12 @@ function tampilkanNamaProduk($query) {
     return $response;
     }
 
-$data = tampilkan("SELECT t.id_transaksi,t.tanggal,u.nama,d.jumlah,p.harga FROM transaksi t INNER JOIN user u ON t.id_pelanggan = u.id INNER JOIN detail d ON t.id_transaksi = d.id_transaksi INNER JOIN product p ON d.id_produk = p.id  WHERE t.id_transaksi = $id");
-$data2 = tampilkanNamaProduk("SELECT p.nama FROM transaksi t INNER JOIN detail d ON t.id_transaksi = d.id_transaksi INNER JOIN product p ON d.id_produk = p.id  WHERE t.id_transaksi = $id");
+$data = tampilkan("SELECT t.id_transaksi,t.tanggal,p.nama,d.jumlah,p.harga FROM transaksi t INNER JOIN user u ON t.id_pelanggan = u.id INNER JOIN detail d ON t.id_transaksi = d.id_transaksi INNER JOIN product p ON d.id_produk = p.id  WHERE t.id_transaksi = $id");
+$data2 = tampilkanNamaProduk("SELECT u.nama FROM transaksi t INNER JOIN detail d ON t.id_transaksi = d.id_transaksi INNER JOIN user u ON t.id_pelanggan = u.id INNER JOIN product p ON d.id_produk = p.id  WHERE t.id_transaksi = $id");
 
+foreach($data2['items'] as $key => $value2) {
+    $nama_pelanggan = $value2['nama_pelanggan'];
+}
 
 ?>
 
@@ -62,9 +65,9 @@ $data2 = tampilkanNamaProduk("SELECT p.nama FROM transaksi t INNER JOIN detail d
                 <Tr>
                     <td class="px-3"><?php echo $value['id_transaksi'] ?></td>
                     <td class="px-3"><?php echo $value['tanggal'] ?></td>
-                    <td class="px-3"><?php echo $value['pelanggan'] ?></td>
+                    <td class="px-3"><?php echo $nama_pelanggan ?></td>
                     <td class="px-3"><?php echo $value['jumlah']?></td>
-                    <td class="px-3"><?php foreach($data2['items'] as $value2) echo $value2['nama_produk'] ?></td>
+                    <td class="px-3"><?php echo $value['produk'] ?></td>
                     <td class="px-3"><?php echo number_format($value['harga']) ?></td>
                 </Tr>
                 <?php } ?>

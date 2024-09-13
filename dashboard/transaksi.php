@@ -5,8 +5,28 @@ include "../koneksi.php";
 session_start();
 if(!isset($_SESSION['role']) == 'admin') {
     echo "<script>
-    document.location.href = '../login.php'
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
     </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
+}
+
+if($_SESSION['role'] != 'admin') {
+    echo "<script>
+    document.location.href = '../login.php';
+    alert('anda bukan admin');
+    </script>";
+
+    unset($_SESSION['id_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
+    unset($_SESSION['nama']);
+    unset($_SESSION['role']);
 }
 
 function tampilkan($query){
@@ -78,10 +98,10 @@ $data = tampilkan("SELECT t.id_transaksi,u.nama,t.tanggal,t.total_harga FROM tra
             <h1 class="font-bold text-3xl p-2" >Riwayat Transaksi</h1>
             <table class="border border-slate-900">
                 <tr class="bg-slate-900 text-slate-50">
-                    <th class="border border-slate-900 px-2">No Transaksi</th>
+                    <th class="border border-slate-900 px-2">No </th>
                     <th class="border border-slate-900 px-2 w-44">Nama Pelanggan</th>
                     <th class="border border-slate-900 px-2">Tanggal</th>
-                    <th class="border border-slate-900 px-2">Total Harga</th>
+                    <th class="border border-slate-900 px-2">Total Belanja</th>
                    
                 </tr>
 
