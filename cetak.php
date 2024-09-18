@@ -84,8 +84,10 @@ foreach($data2['items'] as $key => $value2) {
     </div>
 </body>
 <script>
-    document.getElementById('print').addEventListener('click', () => {
+    const print_btn = document.getElementById('print');
+    print_btn.addEventListener('click', () => {
         window.print();
+        print_btn.style.display = 'none';
     })
 </script>
 </html>
