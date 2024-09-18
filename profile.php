@@ -8,7 +8,6 @@ if(!isset($_SESSION['role']) == 'pelanggan' ) {
     </script>";
 }
 
-$id_user = $_SESSION['id_user'];
 
 function tampilkan($query){
     global $koneksi;
@@ -41,7 +40,7 @@ function perbarui_pelanggan($post, $id_pelanggan) {
     $no_telepon = $post['no_telepon'];
     $alamat = $post['alamat'];
 
-  $sql = mysqli_query($koneksi, "UPDATE user SET nama = '$nama', username = '$username' , no_telepon = '$no_telepon', alamat = '$alamat' WHERE id='$id_pelanggan'");
+  $sql = mysqli_query($koneksi, "UPDATE user SET nama = '$nama', username = '$username' , no_telepon = '$no_telepon', alamat = '$alamat' WHERE id='".$_SESSION['id_user']."'");
     
   if($sql > 0) {
     return mysqli_affected_rows($koneksi);
